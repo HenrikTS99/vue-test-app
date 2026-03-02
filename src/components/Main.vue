@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import image_1 from '@/assets/images/a_close_up_of_a_plane.jpg';
 const name = ref('Henrik');
 const quote = ref("First, solve the problem. Then write the code.");
 const isBtnDisabled = ref(true)
@@ -14,6 +15,12 @@ name.value = "Ikke Henrik";
         <section id="buttons">
             <!-- Shorthand v-bind:  :disabled-->
             <button v-bind:disabled="isBtnDisabled">Another!</button>
+        </section>
+        <section>
+            <img src="@/assets/images/a_close_up_of_a_plane.jpg" alt="" />
+        </section>
+        <section>
+            <img v-bind:src="image_1" alt="" />
         </section>
     </main>
 
