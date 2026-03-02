@@ -7,7 +7,7 @@ const href = ref("https://scrimba.com")
 <template>
     <footer>
         <p>&copy; {{ copyright_year }}</p>
-        <p>Created by <a v-bind:href="href"><span>Professor Jeffè</span></a></p>
+        <p>Created by <a :href><span>Professor Jeffè</span></a></p>
     </footer>
 
 </template>
