@@ -5,9 +5,21 @@ const name = ref('Henrik');
 const quote = ref("First, solve the problem. Then write the code.");
 const isBtnDisabled = ref(true)
 const status = ref(false)
-const tasks = ['Task one', 'Task two', 'Task Three']
+const tasks = ref(['Task one', 'Task two', 'Task Three']);
+const newTask = ref('')
 
 name.value = "Ikke Henrik";
+
+function toggleStatus() {
+    status.value = !status.value
+};
+
+const addTask = () => {
+    if (newTask.value.trim() !== '') {
+        tasks.value.push(newTask.value);
+        newTask.value = '';
+    }
+}
 </script>
 
 <template>
@@ -17,11 +29,19 @@ name.value = "Ikke Henrik";
 
         <p v-if="status">Status true!</p>
         <p v-else>Status false!</p>
+        <button @click="toggleStatus">Change Status</button>
 
         <h2>Tasks:</h2>
         <ul>
             <li v-for="task in tasks" :key="task">{{ task }}</li>
         </ul>
+
+        <form @submit.prevent="addTask">
+            <label for="newTask">Add Task</label>
+            <input type="text" id="newTask" name="newTask" v-model="newTask" />
+            <button type="submit">Submit</button>
+        </form>
+
         <section id="buttons">
             <!-- Shorthand v-bind:  :disabled-->
             <button v-bind:disabled="isBtnDisabled">Another!</button>
