@@ -20,6 +20,10 @@ const addTask = () => {
         newTask.value = '';
     }
 }
+
+const deleteTask = (index: number) => {
+    tasks.value.splice(index, 1)
+}
 </script>
 
 <template>
@@ -33,7 +37,10 @@ const addTask = () => {
 
         <h2>Tasks:</h2>
         <ul>
-            <li v-for="task in tasks" :key="task">{{ task }}</li>
+            <li v-for="(task, index) in tasks" :key="task">
+                <splitan>{{ task }}</splitan>
+                <button @click="deleteTask(index)">x</button>
+            </li>
         </ul>
 
         <form @submit.prevent="addTask">
