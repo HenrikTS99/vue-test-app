@@ -1,23 +1,17 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
-const count = ref<number>(0)
+import CounterButton from '@/components/CounterButton.vue';
 
-const doubledCount = computed(() => count.value * 2);
+import { useCounter } from '@/composables/useCounter';
 
-watch(count, (newValue, oldValue) => console.log('Count updated to: ' + newValue + ". Old value was " + oldValue));
+const { count, doubled, increment, decrement } = useCounter(0)
 
-const increment = () => {
-    count.value++;
-}
-const decrement = () => {
-    count.value--;
-}
 </script>
 
 
 <template>
     <h2>Count: {{ count }}</h2>
-    <h3>Count doubled: {{ doubledCount }}</h3>
-    <button @click="increment">Increment</button>
-    <button @click="decrement">Decrement</button>
+    <h3>Count doubled: {{ doubled }}</h3>
+    <CounterButton label='Increment' @update='increment' />
+    <CounterButton label='Decrement' @update='decrement' />
 </template>
