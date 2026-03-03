@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import image_1 from '@/assets/images/a_close_up_of_a_plane.jpg';
 const name = ref('Henrik');
 const quote = ref("First, solve the problem. Then write the code.");
@@ -24,6 +24,22 @@ const addTask = () => {
 const deleteTask = (index: number) => {
     tasks.value.splice(index, 1)
 }
+interface Todo {
+    userID: number
+    id: number
+    title: string
+    completed: boolean
+}
+
+onMounted(async () => {
+    try {
+        const res = await fetch('https://jsonplaceholder.typicode.com/todos');
+        const data: Todo[] = await res.json();
+        tasks.value = data.map((task) => task.title);
+    } catch (error) {
+        console.error('Error fethcing tasks');
+    }
+})
 </script>
 
 <template>
